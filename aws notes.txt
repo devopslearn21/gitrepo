@@ -1,0 +1,72 @@
+***********************
+Disaster recovery
+***********************
+
+
+disaster recovery is getting prepared for and recovering from a disaster.
+
+types:-3- > 1) onprem to on-prem 2) onprem to aws cloud 3) aws cloud region A to region B
+
+
+RPO- Recovery point objective- Time from last DR backup to disaster
+
+RTO- Recovery Time objective- Time to restore from the disaster 
+
+
+DR strategies:
+
+Backup & restore----> light pilot ----> warm standby -------> multi site\\
+
+
+*******----------------------------->>>>>>>>>>>>>>>>>>>>fASTER RTO
+
+
+Backup & Restore has High RPO
+
+for onprem to aws cloud, we neeed to use aws storage gateway to store the backups in S3 and move them to S3 glacier using lifecycle rules. and also use aws snowball to send backup to cloud ( but RPO in thiscase is one week)
+
+for aws cloud to cloud, for backup of EBS, redshift and RDS we use snapshots. DUring disaster, we can use the AMI and RDS recreated from snapshots and get data restored.
+
+*********************
+Pilot Light
+******************
+
+Small version of the app will always run on cloud
+
+useful for critical core
+
+Faster than Backup & restore
+
+**************
+Warm Standby
+******************
+up on disaster we can scale to production load
+
+*******
+Hot site/multi site
+*************
+
+
+
+Database Migration service
+***********************
+1) Quickly & securely migrate databses to aws
+2) source data remains available during migrations
+3) supports homogenuos and heterogenous migrations
+4) CDC - continuous data replication (continuos data capture)
+5) 
+
+
+
+***********AWS schema conversion tool ( SCT)**************
+
+convert database scvhema from one engine to other engine
+example: OLTP ( Oracle or sql server) to mysql, postgresql, aurora.
+         OLAP ( Oracle or sql server) to Amazon red shift
+
+
+
+
+
+
+
