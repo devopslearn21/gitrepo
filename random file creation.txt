@@ -1,0 +1,34 @@
+How to generate a bunch of random files
+ 
+Here's a simple script to generate a lot of random files quickly. As configured, it generates over 3000 files in 4 sub dirs of sizes between a few KB to 2GB. All the files have unique random data, so there will be no compression or dedupe across them. Adjust the values to make it work for you.
+
+# generate 100GB of mixed size files
+# 20 large <2GB each , 600 medium <200MB each, 300 small <8MB each, 2000 smallest <1MB each
+#large files
+mkdir transcoding-files
+cd transcoding-files
+for n in {1..20}; do
+    dd if=/dev/urandom of=file$( printf %03d "$n" ).bin bs=64k count=$(( RANDOM + 1024 ))
+done
+#small files
+cd ..
+mkdir rendering-files
+cd rendering-files
+for n in {1..2000}; do
+    dd if=/dev/urandom of=file$( printf %03d "$n" ).bin bs=1 count=$(( RANDOM + 1024 ))
+done
+#medium files
+cd ..
+mkdir image-files
+cd image-files
+for n in {1..590}; do
+    dd if=/dev/urandom of=file$( printf %03d "$n" ).bin bs=8k count=$(( RANDOM + 1024 ))
+done
+cd ..
+mkdir project-files
+cd project-files
+for n in {1...300}; do
+    dd if=/dev/urandom of=file$( printf %03d "$n$ ).bin bs=4k count=$(( RANDOM +1024 ))
+done
+cd ..
+exit
